@@ -5,8 +5,10 @@ module.exports = ({ options: { env } }) => {
   return {
     plugins: [
       presetEnv({
-        browsers: browserslist(null, { env })
-      })
-    ]
+        browsers: browserslist(null, { env }),
+      }),
+      require("tailwindcss"),
+      require("autoprefixer"),
+    ],
   };
 };

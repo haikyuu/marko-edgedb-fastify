@@ -6,8 +6,6 @@
   --link-color: --medium-color;
 
   --font-color: #333;
-  --font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
-    Helvetica, Arial, sans-serif;
 
   --button-bg: var(--medium-color);
   --button-fg: #fff;
@@ -17,8 +15,7 @@
 }
 
 body {
-  font-family: var(--font-family);
-  color: var(--font-color);
+  /* color: var(--font-color); */
   padding: 0;
   margin: 0;
 }
@@ -60,7 +57,6 @@ img {
 textarea,
 input {
   font-size: 14px;
-  font-family: var(--font-family);
 }
 
 select {
