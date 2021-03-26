@@ -1,0 +1,57 @@
+import { getStories } from "../../lib/api"
+
+static function getPage(query) {
+  console.log("q", query)
+  if (!query || !query.includes("page")) return 1;
+  return +query.split("=")[1];
+}
+
+$ const page = getPage(input.query);
+<app-layout>
+  <div class="news-view">
+    <await(getStories(input.params.stories || "top", page)) client-reorder>
+      <@then|stories|>
+        <div class="news-list-nav">
+          <if(page > 1)>
+            <a
+              class="page-link"
+              href=`${input.pathname}?page=${page - 1}`
+              aria-label="Previous Page">
+              < prev
+            </a>
+          </if>
+          <else>
+            <span class="page-link disabled" aria-hidden="true">< prev</span>
+          </else>
+          <span>page ${page}</span>
+          <!-- sometimes the length isn't 30? -->
+          <if(stories.length >= 28)>
+            <a
+              class="page-link"
+              href=`${input.pathname}?page=${page + 1}`
+              aria-label="Next Page">
+              more >
+            </a>
+          </if>
+          <else>
+            <span class="page-link" aria-hidden="true">more ></span>
+          </else>
+        </div>
+        <main class="news-list">
+          <ul>
+            <for|story| of=stories>
+              <story story=story/>
+            </for>
+          </ul>
+        </main>
+      </@then>
+      <@placeholder>
+        <div class="news-list-nav">Loading...</div>
+      </@placeholder>
+      <@catch|err|>
+        <!-- Displays if promise rejects -->
+        ${err.name} error: ${err.message}
+      </@catch>
+    </await>
+  </div>
+</app-layout>

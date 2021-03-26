@@ -4,7 +4,8 @@ import fastifyStatic from "fastify-static";
 import fastifyCompress from "fastify-compress";
 import fastifyMarko from "@marko/fastify";
 import buildNameMiddleware from "./middleware/build-name";
-import indexPage from "./pages/index";
+// import indexPage from "./pages_old/index/index";
+import storiesPage from "./pages/:stories/index.js";
 import usersService from "./services/users";
 
 const port = process.env.PORT || 3000;
@@ -17,7 +18,7 @@ fastify()
   })
   .register(fastifyMarko)
   .addHook("onRequest", buildNameMiddleware)
-  .get("/", indexPage)
+  .get("/", storiesPage)
   .get("/services/users", usersService)
   .listen(port, (err, address) => {
     if (err) {
