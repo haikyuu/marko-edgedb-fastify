@@ -1,11 +1,13 @@
 import path from "path";
-import fastify from "fastify"
+import fastify from "fastify";
 import fastifyStatic from "fastify-static";
 import fastifyCompress from "fastify-compress";
 import fastifyMarko from "@marko/fastify";
 import buildNameMiddleware from "./middleware/build-name";
 // import indexPage from "./pages_old/index/index";
 import storiesPage from "./pages/:stories/index.js";
+import storyDetail from "./pages/stories/:id/index.js";
+import userPage from "./pages/users/:id/index.js";
 import usersService from "./services/users";
 
 const port = process.env.PORT || 3000;
@@ -14,11 +16,13 @@ fastify()
   .register(fastifyCompress)
   .register(fastifyStatic, {
     root: path.resolve("dist/client"),
-    prefix: "/static"
+    prefix: "/static",
   })
   .register(fastifyMarko)
   .addHook("onRequest", buildNameMiddleware)
-  .get("/", storiesPage)
+  .get("/stories/:id", storyDetail)
+  .get("/users/:id", userPage)
+  .get("/:stories", storiesPage)
   .get("/services/users", usersService)
   .listen(port, (err, address) => {
     if (err) {
@@ -28,4 +32,4 @@ fastify()
     if (port !== "0") {
       console.log(`Listening on port ${address}`);
     }
-  })
+  });

@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-console.log("herr")
+console.log("herr");
 const mapStories = {
   top: "news",
   new: "newest",
@@ -20,9 +20,7 @@ export function getUser(id) {
   return get(`https://hacker-news.firebaseio.com/v0/user/${id}.json`);
 }
 export function getStories(type, page) {
-  console.log("storuies", {type, page})
   const l = mapStories[type];
-  console.log("s")
   if (!l) return [];
   return get(`https://node-hnapi.herokuapp.com/${l}?page=${page}`);
 }

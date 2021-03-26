@@ -1,6 +1,6 @@
 import Template from "./index.marko";
 
 export default async (request, reply) => {
-  console.log("here 2")
-  await reply.marko(Template, {});
+  const { params, query, hostname, protocol } = request;
+  await reply.marko(Template, { params, query, pathname: `${protocol}://${hostname}` });
 };
