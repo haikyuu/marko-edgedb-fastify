@@ -7,6 +7,9 @@ const SpawnServerPlugin = require("spawn-server-webpack-plugin");
 const MinifyCSSPlugin = require("css-minimizer-webpack-plugin");
 
 const { NODE_ENV } = process.env;
+
+const port = process.env.PORT || 3000;
+
 const isProd = NODE_ENV === "production";
 const isDev = !isProd;
 const markoPlugin = new MarkoPlugin();
@@ -61,7 +64,7 @@ module.exports = [
       devServer:
         isDev && i === 0
           ? {
-              port: 3000,
+              port,
               overlay: true,
               host: "0.0.0.0",
               contentBase: false,

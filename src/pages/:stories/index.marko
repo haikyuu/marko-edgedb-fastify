@@ -10,7 +10,7 @@ $ const page = input.query.page || 1;
           <if(page > 1)>
             <a
               class="page-link"
-              href=`${input.pathname}/?page=${page - 1}`
+              href=`/?page=${page - 1}`
               aria-label="Previous Page">
               < prev
             </a>
@@ -23,7 +23,7 @@ $ const page = input.query.page || 1;
           <if(stories.length >= 28)>
             <a
               class="page-link"
-              href=`${input.pathname}/?page=${page + 1}`
+              href=`/?page=${page + 1}`
               aria-label="Next Page">
               more >
             </a>
